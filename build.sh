@@ -68,7 +68,7 @@ export LD_LIBRARY_PATH_ARG
 BUILD_ARGS_COMMON="
 	--build-arg POLICY --build-arg PLATFORM --build-arg BASEIMAGE
 	--build-arg DEVTOOLSET_ROOTPATH --build-arg PREPEND_PATH --build-arg LD_LIBRARY_PATH_ARG
-	--rm -t ghcr.io/femorph/${POLICY}_${PLATFORM}:python310
+	--rm -t ghcr.io/femorph/${POLICY}_${PLATFORM}:latest
 	-f docker/Dockerfile docker/
 "
 
