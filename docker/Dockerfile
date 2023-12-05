@@ -132,9 +132,9 @@ FROM build_cpython AS build_cpython310
 COPY build_scripts/cpython-pubkey-310-311.txt /build_scripts/cpython-pubkeys.txt
 RUN manylinux-entrypoint /build_scripts/build-cpython.sh 3.10.13
 
-# FROM build_cpython AS build_cpython311
-# COPY build_scripts/cpython-pubkey-310-311.txt /build_scripts/cpython-pubkeys.txt
-# RUN manylinux-entrypoint /build_scripts/build-cpython.sh 3.11.6
+FROM build_cpython AS build_cpython311
+COPY build_scripts/cpython-pubkey-310-311.txt /build_scripts/cpython-pubkeys.txt
+RUN manylinux-entrypoint /build_scripts/build-cpython.sh 3.11.6
 
 # FROM build_cpython AS build_cpython312
 # COPY build_scripts/cpython-pubkey-312-313.txt /build_scripts/cpython-pubkeys.txt
@@ -154,6 +154,7 @@ COPY build_scripts/finalize-python.sh /build_scripts/
 #     manylinux-entrypoint /build_scripts/finalize-python.sh
 
 RUN --mount=type=bind,target=/build_cpython310,from=build_cpython310 \
+    --mount=type=bind,target=/build_cpython311,from=build_cpython311 \
     mkdir -p /opt/_internal && \
     cp -rf /build_cpython*/opt/_internal/* /opt/_internal/ && \
     manylinux-entrypoint /build_scripts/finalize-python.sh

@@ -46,4 +46,4 @@ jobs:
 
       - name: Push image
         if: github.ref == 'refs/heads/main'
-        run: docker push ghcr.io/femorph/${POLICY}_${PLATFORM}:python310
+        run: docker push ghcr.io/femorph/${POLICY}_${PLATFORM}:latest
